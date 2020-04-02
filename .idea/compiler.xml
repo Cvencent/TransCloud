@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="transcloud-eureka" />
+        <module name="transcloud-user" />
+        <module name="transcloud-translate" />
+        <module name="transcloud-data" />
+        <module name="transcloud-gateway-zuul" />
+        <module name="config" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="transcloud-callapi" target="1.8" />
+      <module name="transcloud-config" target="1.8" />
+      <module name="transcloudconfig" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="config" options="-parameters" />
+      <module name="transcloud-callapi" options="-parameters" />
+      <module name="transcloud-config" options="-parameters" />
+      <module name="transcloud-data" options="-parameters" />
+      <module name="transcloud-eureka" options="-parameters" />
+      <module name="transcloud-gateway-zuul" options="-parameters" />
+      <module name="transcloud-translate" options="-parameters" />
+      <module name="transcloud-user" options="-parameters" />
+    </option>
+  </component>
+</project>

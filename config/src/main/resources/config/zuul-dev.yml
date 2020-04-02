@@ -1,0 +1,51 @@
+server:
+  port: 8050
+spring:
+  application:
+    name: zuul
+    #文件上传
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+      enabled: true
+  redis:
+    hots: localhost
+    port: 6379
+    password: 123456
+  session:
+    store-type: redis
+zuul:
+  sensitive-headers: "*"
+#  routes:
+#    user:
+#      path: /user/**
+#      serviceId: user
+#      sensitive-headers: "*"
+#    data:
+#      path: /data/**
+#      serviceId: data
+#      sensitive-headers: "*"
+#    translate:
+#      path: /translate/**
+#      serviceId: translate
+#      sensitive-headers: "*"
+#    user-routes:
+#      path: /user/**
+#      service-id: user
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 100000
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vencent.transcloudtranslate.mapper.TransInterfaceMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="TransInterface">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="interface_type" property="interfaceType" />
+        <result column="app_id" property="appId" />
+        <result column="region" property="region" />
+        <result column="secret_id" property="secretId" />
+        <result column="secret_key" property="secretKey" />
+        <result column="current_interface" property="currentInterface" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, interface_type, app_id, region, secret_id, secret_key,current_interface
+    </sql>
+
+</mapper>

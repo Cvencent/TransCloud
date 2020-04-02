@@ -1,0 +1,38 @@
+CREATE DATABASE translate DEFAULT CHARACTER SET utf8;
+
+use translate;
+
+# 用户信息表
+CREATE TABLE `user`(
+    `id` VARCHAR(64) NOT NULL   COMMENT '用户标识',
+    `user_account` VARCHAR(128) NOT NULL   COMMENT '用户账号',
+    `password` VARCHAR(1024) NOT NULL   COMMENT '用户密码',
+    `username` VARCHAR(128) NOT NULL   COMMENT '用户名称',
+    `create_time` DATETIME NOT NULL   COMMENT '创建时间',
+    PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8
+
+# 历史记录表
+CREATE TABLE `history`(
+    `id` VARCHAR(64) NOT NULL   COMMENT '历史记录标识' ,
+    `user_id` VARCHAR(64) NOT NULL   COMMENT '所属用户标识' ,
+    `trans_source` TEXT    COMMENT '识别源内容' ,
+    `trans_target` TEXT    COMMENT '识别目标内容' ,
+    `trans_speech` BLOB    COMMENT '识别语音' ,
+    `trans_time` DATETIME    COMMENT '识别时间' ,
+    PRIMARY KEY (`id`),
+	CONSTRAINT `user_id_fk1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) DEFAULT CHARSET=utf8
+
+# 翻译接口表
+CREATE TABLE `trans_interface`(
+    `id` VARCHAR(64) NOT NULL   COMMENT '翻译接口标识' ,
+    `user_id` VARCHAR(64) NOT NULL   COMMENT '所属用户' ,
+    `interface_type` VARCHAR(32) NOT NULL   COMMENT '翻译接口类型 调用哪一家的接口' ,
+    `app_id` VARCHAR(64)   DEFAULT NULL COMMENT '翻译产品ID 根据接口需要，没有则不需要填写' ,
+    `region` VARCHAR(64)   DEFAULT NULL COMMENT '翻译接口区域 根据接口需要，没有则不需要填写',
+    `secret_id` VARCHAR(64) NOT NULL   COMMENT '翻译用户ID 接口身份验证ID' ,
+    `secret_key` VARCHAR(64) NOT NULL   COMMENT '翻译用户密钥 接口身份验证密钥' ,
+    PRIMARY KEY (`id`),
+	CONSTRAINT `user_id_fk2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) DEFAULT CHARSET=utf8

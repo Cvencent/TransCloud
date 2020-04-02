@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    status="warn" 日志框架本身的输出日志级别
+    monitorInterval="5" 自动加载配置文件的间隔时间，不低于 5 秒
+-->
+<Configuration status="debug" monitorInterval="5">
+
+    <properties>
+        <property name="LOG_HOME">/userLogs</property>
+    </properties>
+    <Appenders>
+        <!--控制台输出 appender-->
+        <Console name="Console" target="SYSTEM_ERR">
+            <PatternLayout pattern="%d{HH:mm:ss} [%t] [%-5level] %c{36}:%L --- %m%n" />
+        </Console>
+        <!--按照一定规则拆分的日志文件的 appender-->
+        <RollingFile name="rollingFile" fileName="${LOG_HOME}/log.log"
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/log-%d{yyyy-MM-dd-HH-mm}-%i.log">
+<!--            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY" />-->
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%-5level] %l %c{36} - %msg%n" />
+            <Policies>
+                <!--按照文件大小拆分，5MB -->
+                <SizeBasedTriggeringPolicy size="5 MB" />
+            </Policies>
+            <!--在同一个目录下，文件的个数限定为 50 个，超过进行覆盖-->
+            <DefaultRolloverStrategy max="50" />
+        </RollingFile>
+    </Appenders>
+
+    <!--logger 定义-->
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="rollingFile" />
+        </Root>
+    </Loggers>
+</Configuration>
